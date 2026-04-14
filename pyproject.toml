@@ -36,6 +36,7 @@ dependencies = [
     "tilelang>=0.1.8",
     "flash-linear-attention",
     "nvidia-ml-py>=12.575.51",
+    "agent-rl",
 ]
 
 [project.scripts]
@@ -123,6 +124,7 @@ override-dependencies = [
 
 [tool.uv.sources]
 torch = { index = "pytorch-cu128" }
+agent-rl = { git = "ssh://git@github.com/allenai/agent-rl.git" }
 verifiers = { git = "https://github.com/PrimeIntellect-ai/verifiers.git", rev = "0760204" }
 torchtitan = { git = "https://github.com/pytorch/torchtitan", rev = "a1fdd7e" }
 dion = { git = "https://github.com/samsja/dion.git", rev = "d891eeb" }
