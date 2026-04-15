@@ -19,7 +19,7 @@ params:
 	@echo "CODE      = $(CODE)"
 	@echo "SESSION   = $(SESSION)"
 
-interactive:
+interactive: params
 	beaker session create \
 	--bare \
 	--workspace $(WORKSPACE) \
