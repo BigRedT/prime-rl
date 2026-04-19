@@ -8,7 +8,7 @@ GPUS      ?=
 CODE      ?=
 SESSION   ?=
 
-.PHONY: interactive params
+.PHONY: interactive params list_secrets
 
 params:
 	@echo "CLUSTER   = $(CLUSTER)"
@@ -19,6 +19,9 @@ params:
 	@echo "CODE      = $(CODE)"
 	@echo "SESSION   = $(SESSION)"
 
+list_secrets:
+	beaker secret list --workspace $(WORKSPACE)
+
 interactive: params
 	beaker session create \
 	--bare \
@@ -28,5 +31,5 @@ interactive: params
 	$(if $(IMAGE),--image $(IMAGE),) \
 	$(if $(GPUS),--gpus $(GPUS),) \
 	--mount src=weka,ref=oe-training-default,dst=/weka \
-	$(if $(CODE),--mount src=hostpath$(,)ref=$(CODE)$(,)dst=/root/$(notdir $(CODE)),) \
-	--secret-env SSH_KEY=SSH_KEY
+	--mount src=secret,ref=SSH_KEY,dst=/root/.ssh/ssh_key \
+	$(if $(CODE),--mount src=hostpath$(,)ref=$(CODE)$(,)dst=/root/$(notdir $(CODE)),)
