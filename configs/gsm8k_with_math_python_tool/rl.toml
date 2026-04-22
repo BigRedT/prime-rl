@@ -1,0 +1,29 @@
+max_steps = 300
+seq_len = 4096
+
+[wandb]
+project = "gsm8k-math-python-tool"
+name = "gsm8k-with-math-python-tool"
+
+[model]
+name = "Qwen/Qwen3-4B-Instruct"
+
+[orchestrator]
+batch_size = 512
+rollouts_per_example = 16
+
+[orchestrator.train.sampling]
+max_tokens = 512
+
+[[orchestrator.train.env]]
+id = "agent_rl.eval.gsm8k_eval"
+args = { split = "train", max_turns = 8 }
+
+[trainer] # Default trainer config
+
+[inference]
+api_server_count = 4
+
+[inference.model]
+tool_call_parser = "auto"
+max_model_len = 4096

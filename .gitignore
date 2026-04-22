@@ -2,6 +2,7 @@
 *.ipynb
 *.jsonl
 configs/endpoints.py
+.claude/settings.local.json
 
 # Artifacts
 **/slurm

@@ -1,8 +1,8 @@
 , := ,
 
 CLUSTER   ?=
-WORKSPACE ?= ai2/tanmayg
-BUDGET    ?= ai2/oe-base
+WORKSPACE ?= ai2/general-tool-use
+BUDGET    ?= ai2/oe-omai
 IMAGE     ?=
 GPUS      ?=
 CODE      ?=
@@ -27,9 +27,10 @@ interactive: params
 	--bare \
 	--workspace $(WORKSPACE) \
 	--budget $(BUDGET) \
+	--env UV_PROJECT_ENVIRONMENT=/tmp/venv \
 	$(if $(CLUSTER),--remote --cluster $(CLUSTER),) \
 	$(if $(IMAGE),--image $(IMAGE),) \
 	$(if $(GPUS),--gpus $(GPUS),) \
 	--mount src=weka,ref=oe-training-default,dst=/weka \
-	--mount src=secret,ref=SSH_KEY,dst=/root/.ssh/ssh_key \
+	--mount src=secret,ref=tanmayg_ssh_key,dst=/root/.ssh/ssh_key \
 	$(if $(CODE),--mount src=hostpath$(,)ref=$(CODE)$(,)dst=/root/$(notdir $(CODE)),)
