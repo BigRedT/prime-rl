@@ -8,7 +8,7 @@ GPUS      ?=
 CODE      ?=
 SESSION   ?=
 
-.PHONY: interactive params list_secrets rl
+.PHONY: interactive params list_secrets rl rl_clean
 
 params:
 	@echo "CLUSTER   = $(CLUSTER)"
@@ -21,6 +21,9 @@ params:
 
 rl:
 	uv run rl @ configs/gsm8k_with_math_python_tool/rl.toml
+
+rl_clean:
+	uv run rl @ configs/gsm8k_with_math_python_tool/rl.toml --clean-output-dir
 
 list_secrets:
 	beaker secret list --workspace $(WORKSPACE)
