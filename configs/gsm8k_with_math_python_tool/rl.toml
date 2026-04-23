@@ -6,10 +6,10 @@ project = "gsm8k-math-python-tool"
 name = "gsm8k-with-math-python-tool"
 
 [model]
-name = "Qwen/Qwen3-4B-Instruct"
+name = "Qwen/Qwen3.5-4B"
 
 [orchestrator]
-batch_size = 512
+batch_size = 32
 rollouts_per_example = 16
 
 [orchestrator.train.sampling]
@@ -22,7 +22,8 @@ args = { split = "train", max_turns = 8 }
 [trainer] # Default trainer config
 
 [inference]
-api_server_count = 4
+api_server_count = 1
+gpu_memory_utilization = 0.70
 
 [inference.model]
 tool_call_parser = "auto"

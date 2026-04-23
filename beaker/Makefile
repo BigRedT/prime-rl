@@ -8,7 +8,7 @@ GPUS      ?=
 CODE      ?=
 SESSION   ?=
 
-.PHONY: interactive params list_secrets
+.PHONY: interactive params list_secrets rl
 
 params:
 	@echo "CLUSTER   = $(CLUSTER)"
@@ -18,6 +18,9 @@ params:
 	@echo "GPUS      = $(GPUS)"
 	@echo "CODE      = $(CODE)"
 	@echo "SESSION   = $(SESSION)"
+
+rl:
+	uv run rl @ configs/gsm8k_with_math_python_tool/rl.toml
 
 list_secrets:
 	beaker secret list --workspace $(WORKSPACE)
