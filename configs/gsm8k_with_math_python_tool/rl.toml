@@ -1,6 +1,11 @@
 max_steps = 300
-output_dir = "outputs/gsm8k-with-math-python-tool"
+output_dir = "/weka/oe-training-default/tanmayg/general-tool-use/training_runs/gsm8k-with-math-python-tool"
 seq_len = 2048
+
+[ckpt]
+interval = 50
+keep_last = 3
+keep_interval = 100
 
 [wandb]
 project = "gsm8k-math-python-tool"
