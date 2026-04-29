@@ -2,7 +2,7 @@
 set -e
 
 if [[ -z "${UV_PROJECT_ENVIRONMENT:-}" ]]; then
-  export UV_PROJECT_ENVIRONMENT=/tmp/venv
+  export UV_PROJECT_ENVIRONMENT=/tmp/prime-rl-venv
 fi
 
 # Mounted as a secret while creating beaker session.

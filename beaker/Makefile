@@ -3,6 +3,7 @@ BUDGET    ?= ai2/oe-omai
 CLUSTER   ?=
 IMAGE     ?=
 GPUS      ?=
+PRIORITY  ?=
 
 .PHONY: interactive params list_secrets rl rl_clean
 
@@ -12,6 +13,7 @@ params:
 	@echo "CLUSTER   = $(CLUSTER)"
 	@echo "IMAGE     = $(IMAGE)"
 	@echo "GPUS      = $(GPUS)"
+	@echo "PRIORITY  = $(PRIORITY)"
 
 rl:
 	uv run rl @ configs/gsm8k_with_math_python_tool/rl.toml
@@ -28,9 +30,10 @@ interactive: params
 	--host-networking \
 	--workspace $(WORKSPACE) \
 	--budget $(BUDGET) \
-	--env UV_PROJECT_ENVIRONMENT=/tmp/venv \
+	--env UV_PROJECT_ENVIRONMENT=/tmp/prime-rl-venv \
 	--mount src=weka,ref=oe-training-default,dst=/weka \
 	--mount src=secret,ref=tanmayg_ssh_key,dst=/root/.ssh/ssh_key \
 	$(if $(CLUSTER),--remote --cluster $(CLUSTER),) \
 	$(if $(IMAGE),--image $(IMAGE),) \
-	$(if $(GPUS),--gpus $(GPUS),)
+	$(if $(GPUS),--gpus $(GPUS),) \
+	$(if $(PRIORITY),--priority $(PRIORITY),)
