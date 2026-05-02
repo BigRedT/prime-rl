@@ -1,5 +1,5 @@
 max_steps = 1000
-output_dir = "/weka/oe-training-default/tanmayg/general-tool-use/training_runs/gsm8k-with-math-python-tool/qwen_3_5_0_8B"
+output_dir = "/weka/oe-training-default/tanmayg/general-tool-use/training_runs/gsm8k-with-math-python-tool/qwen_3_5_0_8B_lora"
 seq_len = 8192
 
 [ckpt]
