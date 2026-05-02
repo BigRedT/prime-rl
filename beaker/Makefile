@@ -19,7 +19,7 @@ rl:
 	uv run rl @ configs/gsm8k_with_math_python_tool/rl.toml
 
 rl_clean:
-	uv run rl @ configs/gsm8k_with_math_python_tool/rl.toml --clean-output-dir
+	uv run rl @ configs/gsm8k_with_math_python_tool/rl_0_8B.toml --clean-output-dir
 
 list_secrets:
 	beaker secret list --workspace $(WORKSPACE)
@@ -31,6 +31,7 @@ interactive: params
 	--workspace $(WORKSPACE) \
 	--budget $(BUDGET) \
 	--env UV_PROJECT_ENVIRONMENT=/tmp/prime-rl-venv \
+	--secret-env WANDB_API_KEY=tanmayg_wandb_api_key \
 	--mount src=weka,ref=oe-training-default,dst=/weka \
 	--mount src=secret,ref=tanmayg_ssh_key,dst=/root/.ssh/ssh_key \
 	$(if $(CLUSTER),--remote --cluster $(CLUSTER),) \

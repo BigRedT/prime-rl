@@ -1,0 +1,44 @@
+max_steps = 1000
+output_dir = "/weka/oe-training-default/tanmayg/general-tool-use/training_runs/gsm8k-with-math-python-tool/qwen_3_5_0_8B"
+seq_len = 8192
+
+[ckpt]
+interval = 50
+keep_last = 3
+keep_interval = 100
+
+[wandb]
+project = "gsm8k-math-python-tool"
+name = "Qwen3.5-0.8B"
+
+[model]
+name = "Qwen/Qwen3.5-0.8B"
+
+[orchestrator]
+batch_size = 64
+rollouts_per_example = 16
+max_async_level = 2
+
+[trainer]
+max_async_level = 2
+
+[trainer.optim]
+lr = 1e-5
+
+[orchestrator.train.sampling]
+max_completion_tokens = 512
+
+[[orchestrator.train.env]]
+id = "agent_rl.eval.gsm8k_eval"
+args = { split = "train", max_turns = 4 }
+
+[trainer.model.lora]
+rank = 16
+alpha = 32.0
+
+[inference]
+api_server_count = 1
+
+[inference.model]
+tool_call_parser = "auto"
+max_model_len = 2048
